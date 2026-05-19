@@ -7,6 +7,7 @@ import com.mylibrary.library.repository.LivroRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.mylibrary.library.enums.StatusLivro;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +27,7 @@ public class DashboardController {
     public Map<String, Object> stats() {
         List<Livro> all = livroRepo.findAll();
         long total = all.size();
-        long disponiveis = all.stream().filter(l -> l.getStatus() != null && l.getStatus().name().equals("DISPONIVEL")).count();
+        long disponiveis = all.stream().filter(l -> l.getStatus() != null && l.getStatus() == StatusLivro.DISPONIVEL).count();
         long emprestados = all.stream().filter(l -> l.getStatus() != null && l.getStatus().name().equals("EMPRESTADO")).count();
         List<Emprestimo> ativos = empreRepo.findByDataDevolucaoEfetivaIsNull();
 
