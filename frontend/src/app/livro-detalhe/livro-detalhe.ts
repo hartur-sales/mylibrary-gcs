@@ -37,8 +37,7 @@ export class LivroDetalhe implements OnInit {
     }
 
     carregarHistorico(livroId: number) {
-        this.service.listarEmprestimos().subscribe(todos => {
-            const h = todos.filter(e => e.livro?.id === livroId);
+        this.service.listarEmprestimosPorLivro(livroId).subscribe(h => {
             this.historico = h;
             this.emprestimoAtivo = h.find(e => !e.dataDevolucaoEfetiva);
         });
@@ -51,12 +50,12 @@ export class LivroDetalhe implements OnInit {
             !this.emprestimo.telefone ||
             !this.emprestimo.dataDevolucaoPrevista
         ) {
-            alert('Preencha nome e data prevista');
+            alert('Preencha nome, telefone e data prevista');
             return;
         }
         this.service.emprestar(this.livro.id, this.emprestimo as any).subscribe({
             next: () => {
-                alert('Emprestado');
+                alert('Emprestado com sucesso!');
                 this.service.getLivro(this.livro!.id!).subscribe(l => {
                     this.livro = l;
                     this.carregarHistorico(this.livro!.id!);
@@ -69,7 +68,7 @@ export class LivroDetalhe implements OnInit {
         if (!this.emprestimoAtivo?.id || !this.livro?.id) return;
         this.service.devolver(this.emprestimoAtivo.id).subscribe({
             next: () => {
-                alert('Livro devolvido');
+                alert('Livro devolvido com sucesso!');
                 this.service.getLivro(this.livro!.id!).subscribe(l => {
                     this.livro = l;
                     this.carregarHistorico(this.livro!.id!);
@@ -79,4 +78,3 @@ export class LivroDetalhe implements OnInit {
         });
     }
 }
-

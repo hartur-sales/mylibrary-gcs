@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/emprestimos")
@@ -31,6 +32,11 @@ public class EmprestimoController {
     @GetMapping("/atrasados")
     public List<Emprestimo> listarAtrasados() {
         return service.listarAtrasados();
+    }
+
+    @GetMapping("/livro/{livroId}")
+    public List<Emprestimo> listarPorLivro(@PathVariable Long livroId) {
+        return service.listarPorLivro(livroId);
     }
 
     @PostMapping("/emprestar")

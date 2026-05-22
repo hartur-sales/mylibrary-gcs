@@ -2,6 +2,7 @@ package com.mylibrary.library.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
@@ -23,6 +24,7 @@ public class Emprestimo {
 
     private LocalDate dataEmprestimo;
 
+    @NotNull(message = "Data de devolução prevista é obrigatória")
     private LocalDate dataDevolucaoPrevista;
 
     private LocalDate dataDevolucaoEfetiva;

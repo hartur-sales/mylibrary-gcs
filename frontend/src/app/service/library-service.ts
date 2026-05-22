@@ -25,12 +25,18 @@ export class LibraryService {
   criarCategoria(c: Categoria) { return this.http.post<Categoria>(`${this.base}/categorias`, c); }
   excluirCategoria(id: number) { return this.http.delete<void>(`${this.base}/categorias/${id}`); }
 
-  emprestar(livroId: number, e: Emprestimo) { return this.http.post<Emprestimo>(`${this.base}/emprestimos/emprestar?livroId=${livroId}`, e); }
-  devolver(emprestimoId: number) { return this.http.post<Emprestimo>(`${this.base}/emprestimos/${emprestimoId}/devolver`, {}); }
+  emprestar(livroId: number, e: Emprestimo) {
+    return this.http.post<Emprestimo>(`${this.base}/emprestimos/emprestar?livroId=${livroId}`, e);
+  }
+  devolver(emprestimoId: number) {
+    return this.http.post<Emprestimo>(`${this.base}/emprestimos/${emprestimoId}/devolver`, {});
+  }
   listarEmprestimos() { return this.http.get<Emprestimo[]>(`${this.base}/emprestimos`); }
   listarAtivos() { return this.http.get<Emprestimo[]>(`${this.base}/emprestimos/ativos`); }
   listarAtrasados() { return this.http.get<Emprestimo[]>(`${this.base}/emprestimos/atrasados`); }
+  listarEmprestimosPorLivro(livroId: number) {
+    return this.http.get<Emprestimo[]>(`${this.base}/emprestimos/livro/${livroId}`);
+  }
 
   dashboard() { return this.http.get<any>(`${this.base}/dashboard`); }
 }
-

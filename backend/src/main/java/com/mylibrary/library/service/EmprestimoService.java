@@ -79,4 +79,8 @@ public class EmprestimoService {
     public List<Emprestimo> listarAtrasados() {
         return empreRepo.findAtrasados(LocalDate.now());
     }
+
+    public List<Emprestimo> listarPorLivro(Long livroId) {
+        return empreRepo.findByLivroId(livroId);
+    }
 }
