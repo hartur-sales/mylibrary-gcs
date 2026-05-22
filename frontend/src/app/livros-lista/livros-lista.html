@@ -1,0 +1,35 @@
+<div class="card">
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h2>Livros</h2>
+    <div>
+      <button class="btn" (click)="novo()">Novo Livro</button>
+    </div>
+  </div>
+
+  <div style="margin-top:0.5rem; display:flex; gap:0.5rem;">
+    <select [(ngModel)]="filtroCategoria" (change)="carregarLivros()">
+      <option [ngValue]="undefined">Todas as categorias</option>
+      <option *ngFor="let c of categorias" [ngValue]="c.id">{{c.nome}}</option>
+    </select>
+    <select [(ngModel)]="filtroStatus" (change)="carregarLivros()">
+      <option [ngValue]="undefined">Todos status</option>
+      <option value="DISPONIVEL">DISPONIVEL</option>
+      <option value="EMPRESTADO">EMPRESTADO</option>
+    </select>
+    <input placeholder="buscar por título ou autor" [(ngModel)]="q" (input)="carregarLivros()" />
+  </div>
+
+  <div style="margin-top:1rem">
+    <div *ngIf="livros.length===0">Nenhum livro encontrado.</div>
+    <div *ngFor="let l of livros" class="list-item">
+      <div>
+        <strong>{{l.titulo}}</strong> — {{l.autor}} <small>({{l.categoria?.nome}})</small>
+      </div>
+      <div>
+        <button class="btn" (click)="ver(l.id)">Ver</button>
+        <button class="btn danger" (click)="deletar(l.id)" [disabled]="l.status!=='DISPONIVEL'">Excluir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
