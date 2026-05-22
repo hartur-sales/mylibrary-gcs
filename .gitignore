@@ -19,9 +19,18 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+# virtual machine crash logs
 hs_err_pid*
 replay_pid*
 
+# Backend
 backend/target/
+
+# Frontend
 frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# IDE
+.idea/
+frontend/.idea/

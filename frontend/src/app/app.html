@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="header">
+    <h1>{{ title() }}</h1>
+    <div>
+      <a routerLink="/dashboard" class="btn">Dashboard</a>
+      <a routerLink="/livros" class="btn">Livros</a>
+      <a routerLink="/categorias" class="btn">Categorias</a>
+      <a routerLink="/emprestimos" class="btn">Empréstimos</a>
+    </div>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>
+
