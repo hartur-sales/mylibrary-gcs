@@ -1,0 +1,27 @@
+<div class="card">
+  <h2>Novo Livro</h2>
+
+  <label>Título</label>
+  <input [(ngModel)]="livro.titulo" />
+
+  <label>Autor</label>
+  <input [(ngModel)]="livro.autor" />
+
+  <label>ISBN</label>
+  <input [(ngModel)]="livro.isbn" />
+
+  <label>Ano</label>
+  <input type="number" [(ngModel)]="livro.ano" />
+
+  <label>Categoria</label>
+  <select [(ngModel)]="selectedCategoriaId">
+    <option [ngValue]="undefined">-- selecione --</option>
+    <option *ngFor="let c of categorias" [ngValue]="c.id">{{c.nome}}</option>
+  </select>
+
+  <div style="margin-top:1rem; display:flex; gap:0.5rem;">
+    <button class="btn primary" (click)="salvar()">Salvar</button>
+    <button class="btn" (click)="cancelar()">Cancelar</button>
+  </div>
+</div>
+

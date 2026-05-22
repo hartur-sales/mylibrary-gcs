@@ -1,0 +1,39 @@
+<div class="card" *ngIf="livro">
+  <h2>{{livro.titulo}}</h2>
+  <div><strong>Autor:</strong> {{livro.autor}}</div>
+  <div><strong>Ano:</strong> {{livro.ano}}</div>
+  <div><strong>ISBN:</strong> {{livro.isbn}}</div>
+  <div><strong>Categoria:</strong> {{livro.categoria?.nome}}</div>
+  <div><strong>Status:</strong> {{livro.status}}</div>
+
+  <div *ngIf="livro.status === 'DISPONIVEL'" style="margin-top:1rem">
+    <h3>Emprestar livro</h3>
+    <label>Nome</label>
+    <input [(ngModel)]="emprestimo.nomePessoa" />
+    <label>Telefone</label>
+    <input [(ngModel)]="emprestimo.telefone" />
+    <label>Data devolução prevista</label>
+    <input type="date" [(ngModel)]="emprestimo.dataDevolucaoPrevista" />
+    <div style="margin-top:0.5rem">
+      <button class="btn primary" (click)="emprestar()">Emprestar</button>
+    </div>
+  </div>
+
+  <div *ngIf="livro.status === 'EMPRESTADO'" style="margin-top:1rem">
+    <h3>Livro emprestado</h3>
+    <div><strong>Pessoa:</strong> {{emprestimoAtivo?.nomePessoa}}</div>
+    <div><strong>Prevista:</strong> {{emprestimoAtivo?.dataDevolucaoPrevista}}</div>
+    <div style="margin-top:0.5rem">
+      <button class="btn primary" (click)="devolver()">Registrar devolução</button>
+    </div>
+  </div>
+
+  <div style="margin-top:1rem">
+    <h3>Histórico de Empréstimos</h3>
+    <div *ngIf="historico.length===0">Sem histórico.</div>
+    <div *ngFor="let h of historico" class="list-item">
+      <div>{{h.nomePessoa}} — Prevista: {{h.dataDevolucaoPrevista}} — Devolução: {{h.dataDevolucaoEfetiva || '-'}}</div>
+    </div>
+  </div>
+</div>
+

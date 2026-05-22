@@ -1,0 +1,23 @@
+<div class="card">
+  <h2>Categorias</h2>
+
+  <div style="margin-bottom:1rem">
+    <label>Nome</label>
+    <input [(ngModel)]="nova.nome" />
+    <label>Descrição</label>
+    <input [(ngModel)]="nova.descricao" />
+    <div style="margin-top:0.5rem">
+      <button class="btn primary" (click)="criar()">Criar</button>
+    </div>
+  </div>
+
+  <div *ngIf="categorias.length===0">Nenhuma categoria.</div>
+  <div *ngFor="let c of categorias" class="list-item">
+    <div>
+      {{c.nome}} <small>{{c.descricao}}</small>
+      <small> - livros: {{contagemLivrosPorCategoria[c.id || 0] || 0}}</small>
+    </div>
+    <div><button class="btn danger" (click)="excluir(c.id)">Excluir</button></div>
+  </div>
+</div>
+

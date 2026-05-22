@@ -1,0 +1,23 @@
+<div class="card">
+  <h2>Empréstimos Ativos</h2>
+  <div *ngIf="ativos.length === 0">Nenhum empréstimo ativo.</div>
+  <div *ngFor="let e of ativos" class="list-item">
+    <div>
+      <strong>{{e.livro?.titulo}}</strong> — {{e.nomePessoa}} — Prevista: {{e.dataDevolucaoPrevista}}
+    </div>
+    <div>
+      <button class="btn" (click)="devolver(e.id)">Devolver</button>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Relatório de Atrasados</h2>
+  <div *ngIf="atrasados.length === 0">Nenhum empréstimo atrasado.</div>
+  <div *ngFor="let e of atrasados" class="list-item">
+    <div>
+      <strong>{{e.livro?.titulo}}</strong> — {{e.nomePessoa}} — Prevista: {{e.dataDevolucaoPrevista}} — Dias atraso: {{diasAtraso(e.dataDevolucaoPrevista)}}
+    </div>
+  </div>
+</div>
+

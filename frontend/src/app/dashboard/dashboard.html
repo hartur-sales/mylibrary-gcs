@@ -1,0 +1,19 @@
+<div class="card">
+  <h2>Dashboard</h2>
+  <div style="display:flex; gap:1rem;">
+    <div class="card">Total livros: {{stats.totalLivros || 0}}</div>
+    <div class="card">Disponíveis: {{stats.livrosDisponiveis || 0}}</div>
+    <div class="card">Emprestados: {{stats.livrosEmprestados || 0}}</div>
+    <div class="card">Empréstimos ativos: {{stats.emprestimosAtivos || 0}}</div>
+  </div>
+
+  <div style="margin-top:1rem">
+    <h3>Últimos empréstimos</h3>
+    <div *ngIf="(stats.ultimosEmprestimos?.length ?? 0) === 0">Nenhum empréstimo recente.</div>
+    <div *ngFor="let e of stats.ultimosEmprestimos || []" class="list-item">
+      <div>{{e.nomePessoa}} — {{e.livro?.titulo}} — {{e.dataEmprestimo}}</div>
+    </div>
+  </div>
+</div>
+
+
