@@ -11,8 +11,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/livros")
+@CrossOrigin(origins = "http://localhost:4200")
 public class LivroController {
-
     private final LivroService service;
 
     public LivroController(LivroService service) {
@@ -49,7 +49,7 @@ public class LivroController {
             service.excluir(id);
             return ResponseEntity.noContent().build();
         } catch (IllegalStateException | IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+            return ResponseEntity.badRequest().body(Map.of("message", ex.getMessage()));
         }
     }
 }

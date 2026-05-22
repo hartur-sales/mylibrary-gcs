@@ -10,8 +10,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/emprestimos")
+@CrossOrigin(origins = "http://localhost:4200")
 public class EmprestimoController {
-
     private final EmprestimoService service;
 
     public EmprestimoController(EmprestimoService service) {
@@ -41,7 +41,7 @@ public class EmprestimoController {
         try {
             return ResponseEntity.ok(service.emprestar(livroId, e));
         } catch (IllegalStateException | IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+            return ResponseEntity.badRequest().body(Map.of("message", ex.getMessage()));
         }
     }
 
@@ -50,7 +50,7 @@ public class EmprestimoController {
         try {
             return ResponseEntity.ok(service.devolver(id));
         } catch (IllegalStateException | IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+            return ResponseEntity.badRequest().body(Map.of("message", ex.getMessage()));
         }
     }
 }

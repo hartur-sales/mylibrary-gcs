@@ -15,12 +15,14 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/dashboard")
+@CrossOrigin(origins = "http://localhost:4200")
 public class DashboardController {
     private final LivroRepository livroRepo;
     private final EmprestimoRepository empreRepo;
 
     public DashboardController(LivroRepository livroRepo, EmprestimoRepository empreRepo) {
-        this.livroRepo = livroRepo; this.empreRepo = empreRepo;
+        this.livroRepo = livroRepo;
+        this.empreRepo = empreRepo;
     }
 
     @GetMapping
@@ -36,7 +38,11 @@ public class DashboardController {
         m.put("livrosDisponiveis", disponiveis);
         m.put("livrosEmprestados", emprestados);
         m.put("emprestimosAtivos", ativos.size());
-        m.put("ultimosEmprestimos", empreRepo.findAll().stream().sorted((a,b)->b.getDataEmprestimo().compareTo(a.getDataEmprestimo())).limit(5).toList());
+        m.put("ultimosEmprestimos", empreRepo.findAll().stream()
+                .filter(e -> e.getDataEmprestimo() != null)
+                .sorted((a, b) -> b.getDataEmprestimo().compareTo(a.getDataEmprestimo()))
+                .limit(5)
+                .toList());
         return m;
     }
 }

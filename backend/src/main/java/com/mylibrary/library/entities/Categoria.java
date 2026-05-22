@@ -20,7 +20,7 @@ public class Categoria {
     private String descricao;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "categoria")
     private List<Livro> livros = new ArrayList<>();
 
     public Long getId() {

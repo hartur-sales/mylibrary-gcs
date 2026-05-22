@@ -10,8 +10,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/categorias")
+@CrossOrigin(origins = "http://localhost:4200")
 public class CategoriaController {
-
     private final CategoriaService service;
 
     public CategoriaController(CategoriaService service) {
@@ -29,7 +29,7 @@ public class CategoriaController {
             Categoria saved = service.criar(c);
             return ResponseEntity.ok(saved);
         } catch (IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+            return ResponseEntity.badRequest().body(Map.of("message", ex.getMessage()));
         }
     }
 
@@ -39,7 +39,7 @@ public class CategoriaController {
             service.excluir(id);
             return ResponseEntity.noContent().build();
         } catch (IllegalStateException | IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+            return ResponseEntity.badRequest().body(Map.of("message", ex.getMessage()));
         }
     }
 }
